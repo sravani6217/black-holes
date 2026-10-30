@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Hole Physics Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <p class="eyebrow">NEXT GEN EXPO 2026 · COMPUTATIONAL PHYSICS</p>
+    <h1>Black Hole Physics Lab</h1>
+    <p>Interactive exploration of spacetime, geodesics, thermodynamics and quantum effects.</p>
+    <small>Schwarzschild baseline · Scientific calculations and conceptual illustrations</small>
+</header>
+
+<nav>
+    <button class="tab active" data-id="geometry">01 Geometry</button>
+    <button class="tab" data-id="light">02 Light Paths</button>
+    <button class="tab" data-id="orbits">03 Particle Orbits</button>
+    <button class="tab" data-id="spacetime">04 Spacetime</button>
+    <button class="tab" data-id="thermo">05 Thermodynamics</button>
+    <button class="tab" data-id="quantum">06 Quantum Physics</button>
+</nav>
+
+<main>
+
+<section class="panel active" id="geometry">
+    <h2>01 · Schwarzschild Geometry</h2>
+    <p>Explore the event horizon, Schwarzschild radius and gravitational redshift.</p>
+
+    <div class="cols">
+        <canvas id="geometryCanvas" width="700" height="400"></canvas>
+
+        <div class="controls">
+            <label>Black-hole mass: <output id="gm">4.3</output> million solar masses</label>
+            <input id="mass" type="range" min="1" max="10000" step=".1" value="4.3">
+
+            <b>Schwarzschild radius</b>
+            <output id="rs">—</output>
+
+            <label>Emitter radius: <output id="er">3</output> × rₛ</label>
+            <input id="emit" type="range" min="1.05" max="20" step=".05" value="3">
+
+            <b>Gravitational redshift</b>
+            <output id="z">—</output>
+
+            <b>Observed / emitted frequency</b>
+            <output id="freq">—</output>
+
+            <p class="formula">1 + z = 1 / √(1 − rₛ/r)</p>
+            <small>Assumes a stationary emitter outside the horizon.</small>
+        </div>
+    </div>
+</section>
+
+<section class="panel" id="light">
+    <h2>02 · Null Geodesics and Photon Sphere</h2>
+    <p>Explore how light travels around a Schwarzschild black hole.</p>
+
+    <div class="cols">
+        <canvas id="lightCanvas" width="700" height="400"></canvas>
+
+        <div class="controls">
+            <label>Impact parameter: <output id="ib">3</output> × rₛ</label>
+            <input id="impact" type="range" min="1.5" max="8" step=".05" value="3">
+
+            <b>Photon sphere</b>
+            <output>1.5 rₛ</output>
+
+            <b>Critical impact parameter</b>
+            <output>2.598 rₛ</output>
+
+            <b>Light trajectory outcome</b>
+            <output id="outcome">—</output>
+
+            <p class="formula">bcrit = (3√3/2) rₛ</p>
+            <small>Trajectory drawing is schematic; the classification uses the Schwarzschild critical impact parameter.</small>
+        </div>
+    </div>
+</section>
+
+<section class="panel" id="orbits">
+    <h2>03 · Timelike Geodesics and Particle Orbits</h2>
+    <p>Explore stable and unstable circular particle orbits.</p>
+
+    <div class="cols">
+        <canvas id="orbitCanvas" width="700" height="400"></canvas>
+
+        <div class="controls">
+            <label>Orbital radius: <output id="orb">4</output> × rₛ</label>
+            <input id="orbit" type="range" min="1.6" max="12" step=".05" value="4">
+
+            <b>ISCO radius</b>
+            <output>3 rₛ</output>
+
+            <b>Orbit classification</b>
+            <output id="stability">—</output>
+
+            <p class="formula">rISCO = 6GM/c² = 3rₛ</p>
+            <small>Assumes a non-rotating Schwarzschild black hole.</small>
+        </div>
+    </div>
+</section>
+
+<section class="panel" id="spacetime">
+    <h2>04 · Spacetime Coordinates</h2>
+    <p>Explore different coordinate systems and causal structure.</p>
+
+    <div class="controls">
+        <label>Select coordinate system</label>
+        <select id="coord">
+            <option value="sch">Schwarzschild Coordinates</option>
+            <option value="ef">Eddington–Finkelstein Coordinates</option>
+            <option value="kr">Kruskal–Szekeres / Penrose-style Diagram</option>
+        </select>
+    </div>
+
+    <canvas id="spaceCanvas" width="850" height="430"></canvas>
+
+    <div class="info" id="coordInfo"></div>
+
+    <small>The Kruskal–Szekeres diagram is a teaching representation of the ideal extended Schwarzschild solution.</small>
+</section>
+
+<section class="panel" id="thermo">
+    <h2>05 · Black-Hole Thermodynamics</h2>
+    <p>Calculate theoretical temperature, entropy and surface gravity.</p>
+
+    <div class="cols">
+        <canvas id="chart" width="700" height="350"></canvas>
+
+        <div class="controls">
+            <label>Mass: <output id="tm">4.3</output> million solar masses</label>
+            <input id="tMass" type="range" min="1" max="10000" step=".1" value="4.3">
+
+            <div class="buttons">
+                <button id="sgr">Sagittarius A*</button>
+                <button id="m87">M87*</button>
+            </div>
+
+            <b>Hawking temperature</b>
+            <output id="temp">—</output>
+
+            <b>Entropy</b>
+            <output id="entropy">—</output>
+
+            <b>Surface gravity</b>
+            <output id="surface">—</output>
+
+            <p class="formula">T = ℏc³/(8πGMkB)</p>
+            <p class="formula">S = kBc³A/(4Gℏ)</p>
+
+            <small>These are theoretical Schwarzschild predictions. Hawking radiation has not been directly detected from astrophysical black holes.</small>
+        </div>
+    </div>
+</section>
+
+<section class="panel" id="quantum">
+    <h2>06 · Quantum Physics and Information Paradox</h2>
+    <p>Explore the conceptual connection between quantum fields and black holes.</p>
+
+    <div class="cols">
+        <canvas id="quantumCanvas" width="700" height="400"></canvas>
+
+        <div class="controls">
+            <label>Select a concept</label>
+
+            <select id="qmode">
+                <option value="field">Quantum Fields Near a Horizon</option>
+                <option value="evap">Hawking Evaporation Trend</option>
+                <option value="info">Information Paradox</option>
+            </select>
+
+            <div class="info" id="qinfo"></div>
+
+            <div id="evapControls" hidden>
+                <label>Starting mass: <output id="em">10</output> relative units</label>
+                <input id="evap" type="range" min="1" max="20" value="10">
+
+                <b>Relative temperature</b>
+                <output id="et">—</output>
+            </div>
+
+            <small>Conceptual illustration only. This does not solve the information paradox or perform a full quantum-field calculation.</small>
+        </div>
+    </div>
+</section>
+
+<section class="info">
+    <h3>Scientific Scope and Limitations</h3>
+    <p>
+        This project uses the Schwarzschild solution as a theoretical baseline.
+        M87* and Sagittarius A* may rotate, so Kerr geometry is needed for a
+        more complete description. Some visualisations are schematic, while
+        the displayed physical quantities use idealised mathematical formulas.
+    </p>
+</section>
+
+</main>
+
+<footer>
+    Black Hole Physics Lab · Next Gen Expo 2026
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
